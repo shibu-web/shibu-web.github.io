@@ -1,6 +1,6 @@
 import { type RouteProps } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { Second } from "./pages/Second";
+import Profile from "./pages/Profile";
 
 export const routes: RouteProps[] = [
   {
@@ -8,7 +8,7 @@ export const routes: RouteProps[] = [
     Component: Home,
   },
   {
-    path: "/second",
-    Component: Second,
+    path: "/profile",
+    Component: Profile,
   },
 ];
