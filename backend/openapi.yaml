@@ -1,0 +1,116 @@
+openapi: 3.0.0
+paths:
+  /api/v1:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags:
+        - App
+  /api/v1/test/{testString}:
+    get:
+      operationId: TestController_testGet
+      parameters:
+        - name: testString
+          required: true
+          in: path
+          description: テスト用の文字列
+          schema:
+            example: test
+            type: string
+        - name: testNumber
+          required: true
+          in: query
+          description: 自然数
+          schema:
+            minimum: 1
+            example: 123
+            type: number
+      responses:
+        "200":
+          description: テスト用のGETリクエスト
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestGet"
+      tags: &a1
+        - Test
+  /api/v1/test:
+    post:
+      operationId: TestController_testPost
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPostBody"
+      responses:
+        "200":
+          description: テスト用のPOSTリクエスト
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPost"
+      tags: *a1
+info:
+  title: Unyte Sample API
+  description: API description
+  version: "1.0"
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    SampleAuthorization:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      x-tokenName: Authorization
+  schemas:
+    TestGet:
+      type: object
+      properties:
+        testString:
+          type: string
+          description: テスト用の文字列
+          example: test
+        testNumber:
+          type: integer
+          format: int32
+          description: テスト用の数字（自然数）
+          example: 123
+          minimum: 1
+      required:
+        - testString
+        - testNumber
+    TestPostBody:
+      type: object
+      properties:
+        testString:
+          type: string
+          description: テスト用の文字列
+          example: test
+        testAddress:
+          type: string
+          description: テスト用のアドレス
+          example: "0x1234567890abcdef"
+          pattern: ^0x[a-fA-F0-9]{40}$
+      required:
+        - testString
+    TestPost:
+      type: object
+      properties:
+        testString:
+          type: string
+          description: テスト用の文字列
+          example: test
+        testAddress:
+          type: string
+          description: テスト用のアドレス
+          example: "0x1234567890abcdef"
+          pattern: ^0x[a-fA-F0-9]{40}$
+      required:
+        - testString

@@ -1,0 +1,7 @@
+*.env.
+!.env.example
+.specstory
+# SpecStory explanation file
+.specstory/.what-is-this.md
+
+.DS_Store
