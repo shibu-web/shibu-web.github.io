@@ -114,6 +114,7 @@ export default defineConfig({
       promiseImportName: (i) => `__tla_${i}`,
     }),
   ],
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
